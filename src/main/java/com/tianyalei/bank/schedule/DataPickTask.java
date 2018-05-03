@@ -6,6 +6,7 @@ import com.tianyalei.bank.model.DoneMsgId;
 import com.tianyalei.bank.model.MessageEntity;
 import com.tianyalei.bank.tuple.TupleTwo;
 import com.tianyalei.bank.wash.ContactWasher;
+import com.tianyalei.bank.wash.ContentWasher;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,8 @@ public class DataPickTask {
     private MessageManager messageManager;
     @Resource
     private ContactWasher contactWasher;
+    @Resource
+    private ContentWasher contentWasher;
 
 
     /**
@@ -47,7 +50,13 @@ public class DataPickTask {
         }
         List<MessageEntity> entities = messageManager.findByIdBetween(begin, end);
         for (MessageEntity messageEntity : entities) {
-            TupleTwo<Long, String[]> tupleTwo = contactWasher.contactWash(messageEntity);
+            try {
+                TupleTwo<Long, String[]> tupleTwo = contactWasher.contactWash(messageEntity);
+                contentWasher.contentWash(tupleTwo.first, tupleTwo.second, messageEntity.getCreateTime());
+            } catch (Exception e) {
+                //出现异常，continue即可
+                e.printStackTrace();
+            }
         }
 
         doneMsgIdManager.update(begin, end);

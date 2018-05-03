@@ -19,11 +19,11 @@ public class Bill extends BaseEntity {
     /**
      * 支付价格(元)
      */
-    private Long price;
+    private Integer price;
     /**
      * 票面价格(元)
      */
-    private Long billPrice;
+    private Double billPrice;
     /**
      * 票面开始时间
      */
@@ -44,6 +44,33 @@ public class Bill extends BaseEntity {
      * 联系人的id
      */
     private Long contactId;
+    /**
+     * 无法识别的放这里
+     */
+    private String content;
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "bank='" + bank + '\'' +
+                ", price=" + price +
+                ", billPrice=" + billPrice +
+                ", beginTime=" + beginTime +
+                ", endTime=" + endTime +
+                ", type=" + type +
+                ", count=" + count +
+                ", contactId=" + contactId +
+                ", content='" + content + '\'' +
+                '}';
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getBank() {
         return bank;
@@ -61,19 +88,19 @@ public class Bill extends BaseEntity {
         this.type = type;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public Long getBillPrice() {
+    public Double getBillPrice() {
         return billPrice;
     }
 
-    public void setBillPrice(Long billPrice) {
+    public void setBillPrice(Double billPrice) {
         this.billPrice = billPrice;
     }
 

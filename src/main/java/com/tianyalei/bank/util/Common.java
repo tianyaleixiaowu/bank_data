@@ -122,14 +122,6 @@ public class Common {
     }
 
     public static void main(String[] args) {
-        System.out.println(getPhone("\n" +
-                "[玫瑰]河北巨硕[玫瑰]（电票）\n" +
-                "\n" +
-                "半年股份20万×1张 2050\n" +
-                "半年兴业30万×1张2100回头\n" +
-                "\n" +
-                "李   彬15830035088\n" +
-                "李艳江15831998509\n" +
-                "王海洲15931008950"));
+        //billPrice("出18.5万海尔半年                     2450");
     }
 }
