@@ -13,6 +13,10 @@ import java.util.Date;
 @Table(name = "bill")
 public class Bill extends BaseEntity {
     /**
+     * 银行的大分类
+     */
+    private Byte bankType;
+    /**
      * 银行名称
      */
     private String bank;
@@ -21,7 +25,7 @@ public class Bill extends BaseEntity {
      */
     private Integer price;
     /**
-     * 票面价格(元)
+     * 票面价格(万元)
      */
     private Double billPrice;
     /**
@@ -52,7 +56,8 @@ public class Bill extends BaseEntity {
     @Override
     public String toString() {
         return "Bill{" +
-                "bank='" + bank + '\'' +
+                "bankType=" + bankType +
+                ", bank='" + bank + '\'' +
                 ", price=" + price +
                 ", billPrice=" + billPrice +
                 ", beginTime=" + beginTime +
@@ -70,6 +75,14 @@ public class Bill extends BaseEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Byte getBankType() {
+        return bankType;
+    }
+
+    public void setBankType(Byte bankType) {
+        this.bankType = bankType;
     }
 
     public String getBank() {
