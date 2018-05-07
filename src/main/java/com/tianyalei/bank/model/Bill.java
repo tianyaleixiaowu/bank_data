@@ -49,7 +49,7 @@ public class Bill extends BaseEntity {
      */
     private Long contactId;
     /**
-     * 无法识别的放这里
+     * 原文
      */
     private String content;
 

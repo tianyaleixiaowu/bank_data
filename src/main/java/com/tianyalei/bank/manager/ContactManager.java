@@ -30,4 +30,13 @@ public class ContactManager {
         contact.setMobile(mobile);
         return contactRepository.save(contact);
     }
+
+    public String findContact(Long id) {
+        Contact contact = contactRepository.findById(id).get();
+        if (contact.getMobile() != null) {
+            return contact.getMobile();
+        } else {
+            return contact.getNickName();
+        }
+    }
 }

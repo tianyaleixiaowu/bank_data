@@ -27,7 +27,7 @@ public class LineWasher {
     public void lineWash(Long contactId, String line, Date createTime) {
         Bill bill = new Bill();
         //保存一下原文
-        bill.setContent(line.replaceAll(" +", " "));
+        bill.setContent(line.replaceAll(" +", " ").replace("\r", ""));
         bill.setContactId(contactId);
         bill.setType(washType(line));
         TupleTwo<Byte, String> tupleTwo = washBank(line);
