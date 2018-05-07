@@ -7,9 +7,7 @@ import com.tianyalei.bank.util.specify.Criteria;
 import com.tianyalei.bank.wash.BillVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,7 +28,7 @@ public class BillManager {
         billRepository.save(bill);
     }
 
-    public SimplePage<BillVO> find() {
+    public SimplePage<BillVO> find(Pageable pageable) {
         Criteria<Bill> criteria = new Criteria<>();
         //开始时间
         //Date begin = CommonUtil.dateOfStr(infoQuery.getBegin());
@@ -43,18 +41,6 @@ public class BillManager {
         //} else {
         //    criteria.add(Restrictions.ne("channel", "test", true));
         //}
-
-        int page = 0;
-        //if (infoQuery.getPage() != null) {
-        //    page = infoQuery.getPage();
-        //}
-        int size = 10;
-        //if (infoQuery.getSize() != null) {
-        //    size = infoQuery.getSize();
-        //}
-        Sort.Direction direction = Sort.Direction.DESC;
-        Sort sort = new Sort(direction, "id");
-        Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<Bill> billPage = billRepository.findAll(criteria, pageable);
 

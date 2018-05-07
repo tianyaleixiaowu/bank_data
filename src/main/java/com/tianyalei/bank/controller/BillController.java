@@ -5,6 +5,9 @@ import com.tianyalei.bank.bean.ResultGenerator;
 import com.tianyalei.bank.bean.SimplePage;
 import com.tianyalei.bank.manager.BillManager;
 import com.tianyalei.bank.wash.BillVO;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +24,8 @@ public class BillController {
     private BillManager billManager;
 
     @GetMapping
-    public BaseData find() {
-        SimplePage<BillVO> billSimplePage = billManager.find();
+    public BaseData find(@PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        SimplePage<BillVO> billSimplePage = billManager.find(pageable);
         return ResultGenerator.genSuccessResult(billSimplePage.getList(), billSimplePage.getTotalCount());
     }
 }
