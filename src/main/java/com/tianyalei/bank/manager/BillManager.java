@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -35,15 +36,15 @@ public class BillManager {
     public SimplePage<BillVO> find(BillDto billDto) {
         Criteria<Bill> criteria = new Criteria<>();
         //半年期
-        if (billDto.getType() != -1) {
+        if (billDto.getType() != null && -1 != billDto.getType()) {
             criteria.add(Restrictions.eq("type", billDto.getType(), true));
         }
         //银行类型
-        if (billDto.getBankType() != -1) {
+        if (billDto.getBankType() != null && -1 != billDto.getBankType()) {
             criteria.add(Restrictions.eq("bankType", billDto.getBankType(), true));
         }
         Integer billPrice = billDto.getBillPrice();
-        if (billPrice != -1) {
+        if (billPrice != null && -1 != billPrice) {
             if (billPrice == 1) {
                 criteria.add(Restrictions.gte("billPrice", 0, true));
                 criteria.add(Restrictions.lt("billPrice", 10, true));
@@ -63,6 +64,11 @@ public class BillManager {
                 criteria.add(Restrictions.gte("billPrice", 500, true));
             }
         }
+        String keywords = billDto.getKeywords();
+        if (!StringUtils.isEmpty(keywords)) {
+            criteria.add(Restrictions.like("content", keywords, true));
+        }
+
         Pageable pageable = PageRequest.of(billDto.getPage() - 1, billDto.getSize(), Sort.Direction.DESC, "id");
         Page<Bill> billPage = billRepository.findAll(criteria, pageable);
 
