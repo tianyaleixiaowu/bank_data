@@ -2,12 +2,16 @@ package com.tianyalei.bank.manager;
 
 import com.tianyalei.bank.bean.SimplePage;
 import com.tianyalei.bank.dao.BillRepository;
+import com.tianyalei.bank.dto.BillDto;
 import com.tianyalei.bank.model.Bill;
 import com.tianyalei.bank.util.specify.Criteria;
-import com.tianyalei.bank.wash.BillVO;
+import com.tianyalei.bank.util.specify.Restrictions;
+import com.tianyalei.bank.vo.BillVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,20 +32,38 @@ public class BillManager {
         billRepository.save(bill);
     }
 
-    public SimplePage<BillVO> find(Pageable pageable) {
+    public SimplePage<BillVO> find(BillDto billDto) {
         Criteria<Bill> criteria = new Criteria<>();
-        //开始时间
-        //Date begin = CommonUtil.dateOfStr(infoQuery.getBegin());
-        //criteria.add(Restrictions.gt("createTime", begin, true));
-        //Date end = CommonUtil.dateOfStr(infoQuery.getEnd());
-        //criteria.add(Restrictions.lt("createTime", end, true));
-        //if (channels != null && channels.size() > 0) {
-        //    LogicalExpression s2 = Restrictions.in("channel", channels, true);
-        //    criteria.add(s2);
-        //} else {
-        //    criteria.add(Restrictions.ne("channel", "test", true));
-        //}
-
+        //半年期
+        if (billDto.getType() != -1) {
+            criteria.add(Restrictions.eq("type", billDto.getType(), true));
+        }
+        //银行类型
+        if (billDto.getBankType() != -1) {
+            criteria.add(Restrictions.eq("bankType", billDto.getBankType(), true));
+        }
+        Integer billPrice = billDto.getBillPrice();
+        if (billPrice != -1) {
+            if (billPrice == 1) {
+                criteria.add(Restrictions.gte("billPrice", 0, true));
+                criteria.add(Restrictions.lt("billPrice", 10, true));
+            } else if (billPrice == 2) {
+                criteria.add(Restrictions.gte("billPrice", 10, true));
+                criteria.add(Restrictions.lt("billPrice", 30, true));
+            } else if (billPrice == 3) {
+                criteria.add(Restrictions.gte("billPrice", 30, true));
+                criteria.add(Restrictions.lt("billPrice", 50, true));
+            } else if (billPrice == 4) {
+                criteria.add(Restrictions.gte("billPrice", 50, true));
+                criteria.add(Restrictions.lt("billPrice", 100, true));
+            } else if (billPrice == 5) {
+                criteria.add(Restrictions.gte("billPrice", 100, true));
+                criteria.add(Restrictions.lt("billPrice", 500, true));
+            } else if (billPrice == 6) {
+                criteria.add(Restrictions.gte("billPrice", 500, true));
+            }
+        }
+        Pageable pageable = PageRequest.of(billDto.getPage() - 1, billDto.getSize(), Sort.Direction.DESC, "id");
         Page<Bill> billPage = billRepository.findAll(criteria, pageable);
 
         List<BillVO> billVOS = new ArrayList<>();

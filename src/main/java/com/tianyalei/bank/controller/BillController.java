@@ -3,12 +3,11 @@ package com.tianyalei.bank.controller;
 import com.tianyalei.bank.bean.BaseData;
 import com.tianyalei.bank.bean.ResultGenerator;
 import com.tianyalei.bank.bean.SimplePage;
+import com.tianyalei.bank.dto.BillDto;
 import com.tianyalei.bank.manager.BillManager;
-import com.tianyalei.bank.wash.BillVO;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.tianyalei.bank.vo.BillVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +22,12 @@ public class BillController {
     @Resource
     private BillManager billManager;
 
-    @GetMapping
-    public BaseData find(@PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        SimplePage<BillVO> billSimplePage = billManager.find(pageable);
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @RequestMapping
+    public BaseData find(BillDto billDto) {
+        logger.info(billDto.toString());
+        SimplePage<BillVO> billSimplePage = billManager.find(billDto);
         return ResultGenerator.genSuccessResult(billSimplePage.getList(), billSimplePage.getTotalCount());
     }
 }

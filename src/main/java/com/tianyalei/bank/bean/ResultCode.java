@@ -5,7 +5,7 @@ package com.tianyalei.bank.bean;
  */
 public enum ResultCode {
     //成功
-    SUCCESS(0),
+    SUCCESS(200),
     //失败
     FAIL(400),
     //未认证（签名错误）
