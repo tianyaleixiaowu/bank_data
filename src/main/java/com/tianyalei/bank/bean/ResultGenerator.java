@@ -19,6 +19,15 @@ public class ResultGenerator {
                 .setData(data);
     }
 
+    public static PageData genSuccessResult(Object data, long count) {
+        PageData pageData = new PageData();
+        pageData.setCount(count);
+        pageData.setCode(ResultCode.SUCCESS);
+        pageData.setMessage(DEFAULT_SUCCESS_MESSAGE);
+        pageData.setData(data);
+        return pageData;
+    }
+
     public static BaseData genFailResult(String message) {
         return new BaseData()
                 .setCode(ResultCode.FAIL)
