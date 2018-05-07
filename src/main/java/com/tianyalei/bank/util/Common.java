@@ -20,7 +20,7 @@ public class Common {
         }
         String s = phone.toString();
         if (!StringUtils.isEmpty(s)) {
-            return s.substring(0, s.length() - 2);
+            return s.substring(0, s.length() - 1);
         }
         return phone.toString();
     }
