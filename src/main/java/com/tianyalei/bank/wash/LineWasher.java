@@ -37,7 +37,7 @@ public class LineWasher {
         bill.setBillPrice(billPrice(line));
         bill.setCreateTime(createTime);
         bill.setUpdateTime(createTime);
-        bill.setCount(1);
+        bill.setCount(washCount(line));
 
         billManager.save(bill);
         logger.info(bill.toString());
@@ -62,6 +62,43 @@ public class LineWasher {
             }
         }
         return 0;
+    }
+
+    private static Integer washCount(String line) {
+        //String line = "一年期农商100*10 5150‼️";
+        //String line1 = "一年中原100*4";
+        if (line.contains("*") || line.contains("X") || line.contains("x")) {
+            int index = line.indexOf("*");
+            int index1 = line.indexOf("X");
+            int index2 = line.indexOf("x");
+            if (index == -1) {
+                index = index1;
+            }
+            if (index == -1) {
+                index = index2;
+            }
+            String result;
+            if (line.length() > index + 2) {
+                result = line.substring(index + 1, index + 3);
+            } else {
+                result = line.substring(index + 1, index + 2);
+            }
+
+            try {
+                return Integer.valueOf(result.trim());
+            } catch (Exception e) {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
+    }
+
+    public static void main(String[] args) {
+        String line = "一年期农商100*10 5150‼️";
+        String line1 = "一年中原100*4";
+        System.out.println(washCount(line));
+        System.out.println(washCount(line1));
     }
 
     /**
