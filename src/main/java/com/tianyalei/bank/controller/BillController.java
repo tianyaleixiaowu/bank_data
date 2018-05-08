@@ -28,7 +28,7 @@ public class BillController {
     /**
      * 删除
      */
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     public BaseData delete(@PathVariable Long id) {
         logger.info("delete id " + id);
         billManager.delete(id);
