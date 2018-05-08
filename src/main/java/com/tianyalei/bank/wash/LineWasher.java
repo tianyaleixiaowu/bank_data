@@ -25,6 +25,7 @@ public class LineWasher {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public void lineWash(Long contactId, String line, Date createTime) {
+        logger.info("line的内容是：" + line);
         Bill bill = new Bill();
         //保存一下原文
         bill.setContent(line.replaceAll(" +", " ").replace("\r", ""));
@@ -91,7 +92,12 @@ public class LineWasher {
             }
         } else if (line.contains("张")) {
             int index = line.indexOf("张");
-            String result = line.substring(index - 2, index);
+            String result;
+            try {
+                result = line.substring(index - 2, index);
+            } catch (Exception e) {
+                result = line.substring(index - 1, index);
+            }
             if (result.contains("两")) {
                 return 2;
             } else if (result.contains("多")) {
@@ -188,7 +194,7 @@ public class LineWasher {
         return 0;
     }
 
-     /**
+    /**
      * 取银行名字
      */
     public static TupleTwo<Byte, String> washBank(String line) {
@@ -230,23 +236,24 @@ public class LineWasher {
         return new TupleTwo<>(BankType.QI_TA, "其他");
     }
 
-    private static String[] guo_banks = {"中国人民银行","中国进出口银行", "中国农业发展银行", "中国工商银行", "国家开发银行", "工行", "工商", "中国农业银行",
+    private static String[] guo_banks = {"中国人民银行", "中国进出口银行", "中国农业发展银行", "中国工商银行", "国家开发银行", "工行", "工商", "中国农业银行",
             "农行", "农业", "中国建设银行", "建行", "中国银行", "进出口银行", "中银", "国股", "中国"};
     private static String[] gu_shang = {"民生", "华夏银行", "华夏", "中国光大银行", "光大", "中信",
-            "恒丰","招商银行", "招商", "招行", "中国民生银行",   "中信银行",
+            "恒丰", "招商银行", "招商", "招行", "中国民生银行", "中信银行",
             "交通银行", "交通", "交行", "兴业银行", "兴业", "上海浦东发展银行",
             "浦发",
-            "深圳发展银行","深发", "广东发展银行", "广发",
-             "股份"};
-    private static String[] san_nong_banks = {"北京农商","北京农村商业银行", "农商", "信用社", "中国邮政储蓄银行", "农信", "邮政", "邮储",
-             "村镇"};
+            "深圳发展银行", "深发", "广东发展银行", "广发",
+            "股份"};
+    private static String[] san_nong_banks = {"北京农商", "北京农村商业银行", "农商", "信用社", "中国邮政储蓄银行", "农信", "邮政", "邮储",
+            "村镇"};
     //大城商
-    private static String[] da_cheng_banks = {"北京银行", "北京", "上海", "南京银行","南京","宁波银行","宁波", "恒丰银行","恒丰","浙商银行", "浙商",
+    private static String[] da_cheng_banks = {"北京银行", "北京", "上海", "南京银行", "南京", "宁波银行", "宁波", "恒丰银行", "恒丰", "浙商银行",
+            "浙商",
             "渤海银行",
             "渤海", "莱商", "徽商", "齐商"};
     private static String[] company_ticket = {"富邦华一", "富邦", "美的", "海尔", "平安", "民泰", "中原"};
     private static String[] wai_zi = {"外资", "花旗银行", "汇丰银行", "渣打银行", "香港东亚银行", "香港南洋商业银行"};
-    private static String[] city_banks = {"城商",  "天津",  "重庆", "新疆", "乌鲁木齐", "克拉玛依", "三峡",
+    private static String[] city_banks = {"城商", "天津", "重庆", "新疆", "乌鲁木齐", "克拉玛依", "三峡",
             "石河子", "阿拉尔市", "图木舒克", "五家渠", "哈密", "吐鲁番", "阿克苏", "喀什", "和田", "伊宁", "塔城", "阿勒泰", "奎屯", "博乐", "昌吉", "阜康",
             "库尔勒", "阿图什", "乌苏"
             , "西藏", "拉萨", "日喀则", "宁夏", "银川", "石嘴山", "吴忠", "固原", "中卫", "青铜峡市", "灵武市", "呼和浩特", "包头", "乌海", "赤峰", "通辽",
