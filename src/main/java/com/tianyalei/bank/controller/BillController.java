@@ -4,6 +4,7 @@ import com.tianyalei.bank.bean.BaseData;
 import com.tianyalei.bank.bean.ResultGenerator;
 import com.tianyalei.bank.bean.SimplePage;
 import com.tianyalei.bank.dto.BillDto;
+import com.tianyalei.bank.dto.BillMoDto;
 import com.tianyalei.bank.dto.SearchDto;
 import com.tianyalei.bank.manager.BillManager;
 import com.tianyalei.bank.vo.BillVO;
@@ -48,5 +49,10 @@ public class BillController {
         return ResultGenerator.genSuccessResult(billManager.save(billDto));
     }
 
-
+    @PostMapping("/mohu")
+    public BaseData addMohu(BillMoDto billMoDto) {
+        logger.info(billMoDto.toString());
+        billManager.saveMohu(billMoDto);
+        return ResultGenerator.genSuccessResult();
+    }
 }

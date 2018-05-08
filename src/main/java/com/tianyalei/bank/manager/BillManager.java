@@ -3,12 +3,14 @@ package com.tianyalei.bank.manager;
 import com.tianyalei.bank.bean.SimplePage;
 import com.tianyalei.bank.dao.BillRepository;
 import com.tianyalei.bank.dto.BillDto;
+import com.tianyalei.bank.dto.BillMoDto;
 import com.tianyalei.bank.dto.SearchDto;
 import com.tianyalei.bank.model.Bill;
 import com.tianyalei.bank.model.Contact;
 import com.tianyalei.bank.util.specify.Criteria;
 import com.tianyalei.bank.util.specify.Restrictions;
 import com.tianyalei.bank.vo.BillVO;
+import com.tianyalei.bank.wash.ContentWasher;
 import com.tianyalei.bank.wash.LineWasher;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -34,9 +36,18 @@ public class BillManager {
     private BillRepository billRepository;
     @Resource
     private ContactManager contactManager;
+    @Resource
+    private MessageManager messageManager;
+    @Resource
+    private ContentWasher contentWasher;
 
     public void save(Bill bill) {
         billRepository.save(bill);
+    }
+
+    public void saveMohu(BillMoDto billDto) {
+        Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
+        contentWasher.contentWash(contact.getId(), billDto.getContent().split("\n"), new Date());
     }
 
     public Bill save(BillDto billDto) throws ParseException {
