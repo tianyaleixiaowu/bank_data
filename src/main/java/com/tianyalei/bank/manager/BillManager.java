@@ -19,7 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,10 +39,13 @@ public class BillManager {
         billRepository.save(bill);
     }
 
-    public Bill save(BillDto billDto) {
+    public Bill save(BillDto billDto) throws ParseException {
         Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
         Bill bill = new Bill();
         BeanUtils.copyProperties(billDto, bill);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = formatter.parse(billDto.getEndTime());
+        bill.setEndTime(date);
         byte bankType = LineWasher.washBank(billDto.getBank()).first;
         bill.setBankType(bankType);
         bill.setContactId(contact.getId());

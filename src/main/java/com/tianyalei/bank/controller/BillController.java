@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 
 /**
  * @author wuweifeng wrote on 2018/5/3.
@@ -35,9 +36,8 @@ public class BillController {
     }
 
     @PostMapping
-    public BaseData add(BillDto billDto) {
+    public BaseData add(BillDto billDto) throws ParseException {
         logger.info(billDto.toString());
-        //SimplePage<BillVO> billSimplePage = billManager.find(searchDto);
-        return null;
+        return ResultGenerator.genSuccessResult(billManager.save(billDto));
     }
 }

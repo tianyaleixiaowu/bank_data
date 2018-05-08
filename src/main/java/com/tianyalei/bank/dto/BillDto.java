@@ -1,7 +1,5 @@
 package com.tianyalei.bank.dto;
 
-import java.util.Date;
-
 /**
  * @author wuweifeng wrote on 2018/5/8.
  */
@@ -22,7 +20,7 @@ public class BillDto {
     /**
      * 结束时间
      */
-    private Date endTime;
+    private String endTime;
     /**
      * 不足、短期1，半年2，一年3，超期4
      */
@@ -89,11 +87,11 @@ public class BillDto {
         this.billPrice = billPrice;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
