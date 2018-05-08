@@ -9,10 +9,7 @@ import com.tianyalei.bank.manager.BillManager;
 import com.tianyalei.bank.vo.BillVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -39,5 +36,12 @@ public class BillController {
     public BaseData add(BillDto billDto) throws ParseException {
         logger.info(billDto.toString());
         return ResultGenerator.genSuccessResult(billManager.save(billDto));
+    }
+
+    @DeleteMapping
+    public BaseData delete(Long id) {
+        logger.info("delete id " + id);
+        billManager.delete(id);
+        return ResultGenerator.genSuccessResult("delete");
     }
 }

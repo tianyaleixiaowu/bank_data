@@ -60,6 +60,10 @@ public class BillManager {
         return billRepository.save(bill);
     }
 
+    public void delete(Long id) {
+        billRepository.deleteById(id);
+    }
+
     public SimplePage<BillVO> find(SearchDto searchDto) {
         Criteria<Bill> criteria = new Criteria<>();
         //半年期
