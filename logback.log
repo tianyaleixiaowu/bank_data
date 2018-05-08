@@ -1013,3 +1013,92 @@ org.springframework.beans.factory.BeanCreationNotAllowedException: Error creatin
 2018-05-08 18:21:48.644  INFO 70521 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2018-05-08 18:21:48.646  INFO 70521 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2018-05-08 18:21:48.678  INFO 70521 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-05-08 19:29:41.492  INFO 71542 --- [main] com.tianyalei.bank.BankDataApplication   : Starting BankDataApplication on weifengdeMacBook-Pro.local with PID 71542 (/Users/wuwf/Downloads/bank_data/target/classes started by wuwf in /Users/wuwf/Downloads/bank_data)
+2018-05-08 19:29:41.501  INFO 71542 --- [main] com.tianyalei.bank.BankDataApplication   : The following profiles are active: local
+2018-05-08 19:29:41.765  INFO 71542 --- [main] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@55dfebeb: startup date [Tue May 08 19:29:41 CST 2018]; root of context hierarchy
+2018-05-08 19:29:44.073  INFO 71542 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c908fb41] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-05-08 19:29:44.538  INFO 71542 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2018-05-08 19:29:44.567  INFO 71542 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-05-08 19:29:44.567  INFO 71542 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-05-08 19:29:44.573  INFO 71542 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/wuwf/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2018-05-08 19:29:44.676  INFO 71542 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-05-08 19:29:44.676  INFO 71542 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2911 ms
+2018-05-08 19:29:44.856  INFO 71542 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2018-05-08 19:29:44.866  INFO 71542 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-05-08 19:29:44.867  INFO 71542 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-05-08 19:29:44.867  INFO 71542 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-05-08 19:29:44.867  INFO 71542 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-05-08 19:29:45.140  INFO 71542 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-05-08 19:29:45.157  INFO 71542 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-05-08 19:29:45.308  INFO 71542 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.16.Final}
+2018-05-08 19:29:45.314  INFO 71542 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-05-08 19:29:45.448  INFO 71542 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-05-08 19:29:45.825  INFO 71542 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-05-08 19:29:46.363  INFO 71542 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-05-08 19:29:46.381  INFO 71542 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-05-08 19:29:47.348  INFO 71542 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-05-08 19:29:48.116  INFO 71542 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 19:29:49.039  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@55dfebeb: startup date [Tue May 08 19:29:41 CST 2018]; root of context hierarchy
+2018-05-08 19:29:49.127  WARN 71542 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-05-08 19:29:49.206  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[],methods=[POST]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.add(com.tianyalei.bank.dto.BillDto) throws java.text.ParseException
+2018-05-08 19:29:49.208  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[],methods=[GET]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.find(com.tianyalei.bank.dto.SearchDto)
+2018-05-08 19:29:49.209  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{id}],methods=[POST]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.delete(java.lang.Long)
+2018-05-08 19:29:49.209  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/mohu],methods=[POST]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.addMohu(com.tianyalei.bank.dto.BillMoDto)
+2018-05-08 19:29:49.217  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-05-08 19:29:49.218  INFO 71542 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-05-08 19:29:49.307  INFO 71542 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 19:29:49.307  INFO 71542 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 19:29:49.771  INFO 71542 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-05-08 19:29:49.773  INFO 71542 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-05-08 19:29:49.782  INFO 71542 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-05-08 19:29:49.798  INFO 71542 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2018-05-08 19:29:49.842  INFO 71542 --- [pool-1-thread-1] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2018-05-08 19:29:49.900  INFO 71542 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2018-05-08 19:29:49.922  INFO 71542 --- [main] com.tianyalei.bank.BankDataApplication   : Started BankDataApplication in 10.568 seconds (JVM running for 12.53)
+2018-05-08 19:30:18.990  INFO 71542 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-05-08 19:30:18.990  INFO 71542 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-05-08 19:30:19.019  INFO 71542 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 29 ms
+2018-05-08 19:30:19.105  INFO 71542 --- [http-nio-8888-exec-1] c.t.bank.controller.BillController       : SearchDto{page=1, size=15, bankType=null, billPrice=null, type=null, keywords=''}
+2018-05-08 19:30:35.287  INFO 71542 --- [http-nio-8888-exec-2] c.t.bank.controller.BillController       : BillDto{, content='半年期：
+2.9046  光大银行*1张   1980
+5万       齐鲁银行*2张    2080
+50万     农商银行*多张   2230
+120万  浙商银行*1张     2230
+注：半年农商50，三张以上➕20', company='333', nickName='223', mobile='333'}
+2018-05-08 19:30:51.014  INFO 71542 --- [http-nio-8888-exec-3] c.t.bank.controller.BillController       : SearchDto{page=1, size=15, bankType=null, billPrice=null, type=null, keywords=''}
+2018-05-08 19:32:28.671  WARN 71542 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m37s663ms).
+2018-05-08 19:32:45.113  INFO 71597 --- [main] c.t.bank.BankDataApplicationTests        : Starting BankDataApplicationTests on weifengdeMacBook-Pro.local with PID 71597 (started by wuwf in /Users/wuwf/Downloads/bank_data)
+2018-05-08 19:32:45.115  INFO 71597 --- [main] c.t.bank.BankDataApplicationTests        : The following profiles are active: local
+2018-05-08 19:32:45.174  INFO 71597 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@2a225dd7: startup date [Tue May 08 19:32:45 CST 2018]; root of context hierarchy
+2018-05-08 19:32:47.138  INFO 71597 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9141c6c7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-05-08 19:32:47.535  INFO 71597 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-05-08 19:32:47.560  INFO 71597 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-05-08 19:32:47.798  INFO 71597 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.16.Final}
+2018-05-08 19:32:47.800  INFO 71597 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-05-08 19:32:47.862  INFO 71597 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-05-08 19:32:48.032  INFO 71597 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-05-08 19:32:48.611  INFO 71597 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-05-08 19:32:48.633  INFO 71597 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-05-08 19:32:49.648  INFO 71597 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-05-08 19:32:50.949  INFO 71597 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 19:32:51.872  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@2a225dd7: startup date [Tue May 08 19:32:45 CST 2018]; root of context hierarchy
+2018-05-08 19:32:52.033  WARN 71597 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-05-08 19:32:52.289  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[],methods=[POST]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.add(com.tianyalei.bank.dto.BillDto) throws java.text.ParseException
+2018-05-08 19:32:52.304  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[],methods=[GET]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.find(com.tianyalei.bank.dto.SearchDto)
+2018-05-08 19:32:52.305  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{id}],methods=[POST]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.delete(java.lang.Long)
+2018-05-08 19:32:52.308  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/mohu],methods=[POST]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.addMohu(com.tianyalei.bank.dto.BillMoDto)
+2018-05-08 19:32:52.313  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-05-08 19:32:52.315  INFO 71597 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-05-08 19:32:52.360  INFO 71597 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 19:32:52.361  INFO 71597 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 19:32:52.744  INFO 71597 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2018-05-08 19:32:52.764  INFO 71597 --- [main] c.t.bank.BankDataApplicationTests        : Started BankDataApplicationTests in 8.385 seconds (JVM running for 9.483)
+2018-05-08 19:32:52.808  INFO 71597 --- [pool-1-thread-1] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2018-05-08 19:32:53.224  INFO 71597 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@2a225dd7: startup date [Tue May 08 19:32:45 CST 2018]; root of context hierarchy
+2018-05-08 19:32:53.229  INFO 71597 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-05-08 19:32:53.230  INFO 71597 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-05-08 19:32:53.255  INFO 71597 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

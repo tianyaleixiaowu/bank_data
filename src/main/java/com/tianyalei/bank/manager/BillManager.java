@@ -37,8 +37,6 @@ public class BillManager {
     @Resource
     private ContactManager contactManager;
     @Resource
-    private MessageManager messageManager;
-    @Resource
     private ContentWasher contentWasher;
 
     public void save(Bill bill) {
@@ -48,6 +46,17 @@ public class BillManager {
     public void saveMohu(BillMoDto billDto) {
         Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
         contentWasher.contentWash(contact.getId(), billDto.getContent().split("\n"), new Date());
+    }
+
+    public static void main(String[] args) {
+        String s = "半年期：\n" +
+                "2.9046  光大银行*1张   1980\n" +
+                "5万       齐鲁银行*2张    2080\n" +
+                "50万     农商银行*多张   2230\n" +
+                "120万  浙商银行*1张     2230\n" +
+                "注：半年农商50，三张以上➕20";
+        String[] ss = s.split("\n");
+        System.out.println(s.split("\n"));
     }
 
     public Bill save(BillDto billDto) throws ParseException {

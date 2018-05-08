@@ -99,6 +99,6 @@ public class ContentWasher {
     private boolean containKey(String line) {
         return line.contains("不足") || line.contains("短期") || line.contains("半年")
                 || line.contains("一年") || line.contains("1年") || line.contains("超期")
-                || line.contains("到期");
+                || line.contains("到期") | line.contains("张") || line.contains("行") || line.contains("万");
     }
 }
