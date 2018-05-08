@@ -191,7 +191,7 @@ public class LineWasher {
      /**
      * 取银行名字
      */
-    private TupleTwo<Byte, String> washBank(String line) {
+    public static TupleTwo<Byte, String> washBank(String line) {
         for (String s : guo_banks) {
             if (line.contains(s)) {
                 return new TupleTwo<>(BankType.GUO_GU, s);

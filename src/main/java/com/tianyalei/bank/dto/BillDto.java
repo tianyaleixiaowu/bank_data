@@ -1,70 +1,100 @@
 package com.tianyalei.bank.dto;
 
+import java.util.Date;
+
 /**
- * @author wuweifeng wrote on 2018/5/7.
+ * @author wuweifeng wrote on 2018/5/8.
  */
 public class BillDto {
-    private Integer page;
-    private Integer size;
+    private Long id;
     /**
-     * 银行类型
+     * 银行名称
      */
-    private Integer bankType;
+    private String bank;
     /**
-     * 面额
+     * 支付价格(元)
      */
-    private Integer billPrice;
+    private Integer price;
     /**
-     * 时间，半年 1年
+     * 票面价格(万元)
+     */
+    private Double billPrice;
+    /**
+     * 结束时间
+     */
+    private Date endTime;
+    /**
+     * 不足、短期1，半年2，一年3，超期4
      */
     private Integer type;
     /**
-     * 关键字
+     * 数量
      */
-    private String keywords;
+    private Integer count;
+    /**
+     * 原文
+     */
+    private String content;
+
+    private String company;
+    private String nickName;
+    private String mobile;
 
     @Override
     public String toString() {
         return "BillDto{" +
-                "page=" + page +
-                ", size=" + size +
-                ", bankType=" + bankType +
+                "id=" + id +
+                ", bank='" + bank + '\'' +
+                ", price=" + price +
                 ", billPrice=" + billPrice +
+                ", endTime=" + endTime +
                 ", type=" + type +
-                ", keywords='" + keywords + '\'' +
+                ", count=" + count +
+                ", content='" + content + '\'' +
+                ", company='" + company + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", mobile='" + mobile + '\'' +
                 '}';
     }
 
-    public Integer getPage() {
-        return page;
+    public Long getId() {
+        return id;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Integer getSize() {
-        return size;
+    public String getBank() {
+        return bank;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setBank(String bank) {
+        this.bank = bank;
     }
 
-    public Integer getBankType() {
-        return bankType;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setBankType(Integer bankType) {
-        this.bankType = bankType;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public Integer getBillPrice() {
+    public Double getBillPrice() {
         return billPrice;
     }
 
-    public void setBillPrice(Integer billPrice) {
+    public void setBillPrice(Double billPrice) {
         this.billPrice = billPrice;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getType() {
@@ -75,11 +105,43 @@ public class BillDto {
         this.type = type;
     }
 
-    public String getKeywords() {
-        return keywords;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

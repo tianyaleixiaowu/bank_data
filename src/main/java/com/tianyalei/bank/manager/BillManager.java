@@ -3,10 +3,13 @@ package com.tianyalei.bank.manager;
 import com.tianyalei.bank.bean.SimplePage;
 import com.tianyalei.bank.dao.BillRepository;
 import com.tianyalei.bank.dto.BillDto;
+import com.tianyalei.bank.dto.SearchDto;
 import com.tianyalei.bank.model.Bill;
+import com.tianyalei.bank.model.Contact;
 import com.tianyalei.bank.util.specify.Criteria;
 import com.tianyalei.bank.util.specify.Restrictions;
 import com.tianyalei.bank.vo.BillVO;
+import com.tianyalei.bank.wash.LineWasher;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,17 +36,27 @@ public class BillManager {
         billRepository.save(bill);
     }
 
-    public SimplePage<BillVO> find(BillDto billDto) {
+    public Bill save(BillDto billDto) {
+        Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
+        Bill bill = new Bill();
+        BeanUtils.copyProperties(billDto, bill);
+        byte bankType = LineWasher.washBank(billDto.getBank()).first;
+        bill.setBankType(bankType);
+        bill.setContactId(contact.getId());
+        return billRepository.save(bill);
+    }
+
+    public SimplePage<BillVO> find(SearchDto searchDto) {
         Criteria<Bill> criteria = new Criteria<>();
         //半年期
-        if (billDto.getType() != null && -1 != billDto.getType()) {
-            criteria.add(Restrictions.eq("type", billDto.getType(), true));
+        if (searchDto.getType() != null && -1 != searchDto.getType()) {
+            criteria.add(Restrictions.eq("type", searchDto.getType(), true));
         }
         //银行类型
-        if (billDto.getBankType() != null && -1 != billDto.getBankType()) {
-            criteria.add(Restrictions.eq("bankType", billDto.getBankType(), true));
+        if (searchDto.getBankType() != null && -1 != searchDto.getBankType()) {
+            criteria.add(Restrictions.eq("bankType", searchDto.getBankType(), true));
         }
-        Integer billPrice = billDto.getBillPrice();
+        Integer billPrice = searchDto.getBillPrice();
         if (billPrice != null && -1 != billPrice) {
             if (billPrice == 1) {
                 criteria.add(Restrictions.gte("billPrice", 0, true));
@@ -64,12 +77,12 @@ public class BillManager {
                 criteria.add(Restrictions.gte("billPrice", 500, true));
             }
         }
-        String keywords = billDto.getKeywords();
+        String keywords = searchDto.getKeywords();
         if (!StringUtils.isEmpty(keywords)) {
             criteria.add(Restrictions.like("content", keywords, true));
         }
 
-        Pageable pageable = PageRequest.of(billDto.getPage() - 1, billDto.getSize(), Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(searchDto.getPage() - 1, searchDto.getSize(), Sort.Direction.DESC, "id");
         Page<Bill> billPage = billRepository.findAll(criteria, pageable);
 
         List<BillVO> billVOS = new ArrayList<>();
