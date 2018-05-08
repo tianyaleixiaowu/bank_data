@@ -89,6 +89,27 @@ public class LineWasher {
             } catch (Exception e) {
                 return 1;
             }
+        } else if (line.contains("张")) {
+            int index = line.indexOf("张");
+            String result = line.substring(index - 2, index);
+            if (result.contains("两")) {
+                return 2;
+            } else if (result.contains("多")) {
+                return 10;
+            } else {
+                //找数字
+                String regex = "\\d*";
+                Pattern p = Pattern.compile(regex);
+
+                Matcher m = p.matcher(result);
+                while (m.find()) {
+                    String s = m.group();
+                    if (!"".equals(s)) {
+                        return Integer.valueOf(s);
+                    }
+                }
+                return 1;
+            }
         } else {
             return 1;
         }
