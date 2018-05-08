@@ -25,6 +25,16 @@ public class BillController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    /**
+     * 删除
+     */
+    @GetMapping("/{id}")
+    public BaseData delete(@PathVariable Long id) {
+        logger.info("delete id " + id);
+        billManager.delete(id);
+        return ResultGenerator.genSuccessResult("delete");
+    }
+
     @GetMapping
     public BaseData find(SearchDto searchDto) {
         logger.info(searchDto.toString());
@@ -38,10 +48,5 @@ public class BillController {
         return ResultGenerator.genSuccessResult(billManager.save(billDto));
     }
 
-    @DeleteMapping
-    public BaseData delete(Long id) {
-        logger.info("delete id " + id);
-        billManager.delete(id);
-        return ResultGenerator.genSuccessResult("delete");
-    }
+
 }
