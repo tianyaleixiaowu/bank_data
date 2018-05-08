@@ -94,13 +94,6 @@ public class LineWasher {
         }
     }
 
-    public static void main(String[] args) {
-        String line = "一年期农商100*10 5150‼️";
-        String line1 = "一年中原100*4";
-        System.out.println(washCount(line));
-        System.out.println(washCount(line1));
-    }
-
     /**
      * 票面价格
      *
@@ -138,7 +131,7 @@ public class LineWasher {
             if (stringBuilder.toString().length() > 0) {
                 return Double.valueOf(stringBuilder.toString());
             }
-        } else if (line.contains("出") && !"其他".equals(washBank(line))) {
+        } else if (line.contains("出") || !"其他".equals(washBank(line)) || line.contains("收")) {
             //大于1小于250的一个数字
             String regex = "\\d*";
             Pattern p = Pattern.compile(regex);
@@ -231,7 +224,7 @@ public class LineWasher {
             "渤海银行",
             "渤海", "莱商", "徽商", "齐商"};
     private static String[] company_ticket = {"富邦华一", "富邦", "美的", "海尔", "平安", "民泰", "中原"};
-    private static String[] wai_zi = {"花旗银行", "汇丰银行", "渣打银行", "香港东亚银行", "香港南洋商业银行"};
+    private static String[] wai_zi = {"外资", "花旗银行", "汇丰银行", "渣打银行", "香港东亚银行", "香港南洋商业银行"};
     private static String[] city_banks = {"城商",  "天津",  "重庆", "新疆", "乌鲁木齐", "克拉玛依", "三峡",
             "石河子", "阿拉尔市", "图木舒克", "五家渠", "哈密", "吐鲁番", "阿克苏", "喀什", "和田", "伊宁", "塔城", "阿勒泰", "奎屯", "博乐", "昌吉", "阜康",
             "库尔勒", "阿图什", "乌苏"
