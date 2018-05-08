@@ -183,3 +183,33 @@ org.springframework.beans.factory.BeanCreationNotAllowedException: Error creatin
 2018-05-08 10:03:12.989  INFO 61868 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2018-05-08 10:03:12.990  INFO 61868 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2018-05-08 10:03:13.017  INFO 61868 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-05-08 10:46:18.046  INFO 62514 --- [main] c.t.bank.BankDataApplicationTests        : Starting BankDataApplicationTests on weifengdeMacBook-Pro.local with PID 62514 (started by wuwf in /Users/wuwf/Downloads/bank_data)
+2018-05-08 10:46:18.049  INFO 62514 --- [main] c.t.bank.BankDataApplicationTests        : The following profiles are active: local
+2018-05-08 10:46:18.114  INFO 62514 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@125290e5: startup date [Tue May 08 10:46:18 CST 2018]; root of context hierarchy
+2018-05-08 10:46:20.655  INFO 62514 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$36a621c8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-05-08 10:46:21.021  INFO 62514 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-05-08 10:46:21.046  INFO 62514 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-05-08 10:46:21.288  INFO 62514 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.16.Final}
+2018-05-08 10:46:21.290  INFO 62514 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-05-08 10:46:21.342  INFO 62514 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-05-08 10:46:21.498  INFO 62514 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-05-08 10:46:22.097  INFO 62514 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-05-08 10:46:22.122  INFO 62514 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-05-08 10:46:23.600  INFO 62514 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-05-08 10:46:24.746  INFO 62514 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 10:46:25.294  INFO 62514 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@125290e5: startup date [Tue May 08 10:46:18 CST 2018]; root of context hierarchy
+2018-05-08 10:46:25.369  WARN 62514 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-05-08 10:46:25.426  INFO 62514 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[]}" onto public com.tianyalei.bank.bean.BaseData com.tianyalei.bank.controller.BillController.find(com.tianyalei.bank.dto.BillDto)
+2018-05-08 10:46:25.432  INFO 62514 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-05-08 10:46:25.434  INFO 62514 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-05-08 10:46:25.479  INFO 62514 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 10:46:25.480  INFO 62514 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-05-08 10:46:25.867  INFO 62514 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2018-05-08 10:46:25.890  INFO 62514 --- [main] c.t.bank.BankDataApplicationTests        : Started BankDataApplicationTests in 9.309 seconds (JVM running for 10.457)
+2018-05-08 10:46:25.920  INFO 62514 --- [pool-1-thread-1] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2018-05-08 10:46:26.384  INFO 62514 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@125290e5: startup date [Tue May 08 10:46:18 CST 2018]; root of context hierarchy
+2018-05-08 10:46:26.394  INFO 62514 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-05-08 10:46:26.396  INFO 62514 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-05-08 10:46:26.414  INFO 62514 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

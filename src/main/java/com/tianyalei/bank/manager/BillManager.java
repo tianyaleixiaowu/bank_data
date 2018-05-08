@@ -79,6 +79,7 @@ public class BillManager {
             vo.setEndTime(bill.getEndTime() == null ? "未知" : bill.getEndTime().toString());
             vo.setType(type(bill.getType()));
             vo.setContact(contact(bill.getContactId()));
+            vo.setCompany(company(bill.getContactId()));
             billVOS.add(vo);
         }
 
@@ -105,5 +106,9 @@ public class BillManager {
 
     private String contact(Long contactId) {
         return contactManager.findContact(contactId);
+    }
+
+    private String company(Long contactId) {
+        return contactManager.findCompany(contactId);
     }
 }

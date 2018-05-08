@@ -16,6 +16,10 @@ public class BillVO {
      */
     private Integer price;
     /**
+     * 公司名
+     */
+    private String company;
+    /**
      * 票面价格(万元)
      */
     private Double billPrice;
@@ -50,6 +54,14 @@ public class BillVO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getBank() {

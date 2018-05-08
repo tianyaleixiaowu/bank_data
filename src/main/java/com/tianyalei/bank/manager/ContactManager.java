@@ -40,4 +40,12 @@ public class ContactManager {
             return contact.getNickName();
         }
     }
+
+    public String findCompany(Long id) {
+        Contact contact = contactRepository.findById(id).get();
+        if (!StringUtils.isEmpty(contact.getMobile())) {
+            return contact.getNickName().replace(contact.getMobile(), "");
+        }
+        return "";
+    }
 }
