@@ -48,7 +48,7 @@ public class BillManager {
             bill = new Bill();
         }
         BeanUtils.copyProperties(billDto, bill);
-        if (StringUtils.isEmpty(billDto.getEndTime())) {
+        if (!StringUtils.isEmpty(billDto.getEndTime())) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = formatter.parse(billDto.getEndTime());
             bill.setEndTime(date);
