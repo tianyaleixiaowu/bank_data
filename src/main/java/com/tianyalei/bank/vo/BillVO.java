@@ -40,9 +40,10 @@ public class BillVO {
      */
     private Integer count;
     /**
-     * 联系人的id
+     * 联系人
      */
-    private String contact;
+    private String nickName;
+    private String mobile;
     /**
      * 无法识别的放这里
      */
@@ -120,12 +121,20 @@ public class BillVO {
         this.count = count;
     }
 
-    public String getContact() {
-        return contact;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getContent() {

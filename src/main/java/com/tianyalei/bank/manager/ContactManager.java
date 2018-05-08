@@ -3,7 +3,6 @@ package com.tianyalei.bank.manager;
 import com.tianyalei.bank.dao.ContactRepository;
 import com.tianyalei.bank.model.Contact;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
@@ -32,20 +31,12 @@ public class ContactManager {
         return contactRepository.save(contact);
     }
 
-    public String findContact(Long id) {
-        Contact contact = contactRepository.findById(id).get();
-        if (!StringUtils.isEmpty(contact.getMobile())) {
-            return contact.getMobile();
-        } else {
-            return contact.getNickName();
-        }
+    public Contact findContact(Long id) {
+        return contactRepository.findById(id).get();
     }
 
     public String findCompany(Long id) {
         Contact contact = contactRepository.findById(id).get();
-        if (!StringUtils.isEmpty(contact.getMobile())) {
-            return contact.getNickName().replace(contact.getMobile(), "");
-        }
-        return "";
+        return contact.getCompany();
     }
 }

@@ -41,11 +41,19 @@ public class BillManager {
 
     public Bill save(BillDto billDto) throws ParseException {
         Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
-        Bill bill = new Bill();
+        Bill bill;
+        if (billDto.getId() != null) {
+            bill = billRepository.findById(billDto.getId()).get();
+        } else {
+            bill = new Bill();
+        }
         BeanUtils.copyProperties(billDto, bill);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = formatter.parse(billDto.getEndTime());
-        bill.setEndTime(date);
+        if (StringUtils.isEmpty(billDto.getEndTime())) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = formatter.parse(billDto.getEndTime());
+            bill.setEndTime(date);
+        }
+        
         byte bankType = LineWasher.washBank(billDto.getBank()).first;
         bill.setBankType(bankType);
         bill.setContactId(contact.getId());
@@ -97,8 +105,10 @@ public class BillManager {
             BeanUtils.copyProperties(bill, vo);
             vo.setEndTime(bill.getEndTime() == null ? "未知" : bill.getEndTime().toString());
             vo.setType(type(bill.getType()));
-            vo.setContact(contact(bill.getContactId()));
-            vo.setCompany(company(bill.getContactId()));
+            Contact contact = contact(bill.getContactId());
+            vo.setCompany(contact.getCompany());
+            vo.setNickName(contact.getNickName());
+            vo.setMobile(contact.getMobile());
             billVOS.add(vo);
         }
 
@@ -123,11 +133,8 @@ public class BillManager {
         }
     }
 
-    private String contact(Long contactId) {
+    private Contact contact(Long contactId) {
         return contactManager.findContact(contactId);
     }
 
-    private String company(Long contactId) {
-        return contactManager.findCompany(contactId);
-    }
 }

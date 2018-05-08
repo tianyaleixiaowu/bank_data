@@ -29,7 +29,7 @@ public class ContactWasher {
         if (StringUtils.isEmpty(phone)) {
             phone = Common.getPhone(content);
         }
-        Contact contact = contactManager.save(nickName, phone, "");
+        Contact contact = contactManager.save(nickName, phone, nickName.replace(phone, ""));
 
         return new TupleTwo<>(contact.getId(), content.split("\n"));
     }
