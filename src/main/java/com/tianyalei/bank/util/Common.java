@@ -2,6 +2,7 @@ package com.tianyalei.bank.util;
 
 import org.springframework.util.StringUtils;
 
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +10,13 @@ import java.util.regex.Pattern;
  * @author wuweifeng wrote on 2018/5/2.
  */
 public class Common {
+    /**
+     * 生成uuid
+     */
+    public static String token() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
     public static String getPhone(String content) {
         String regex = "1[35789]\\d{9}";
         Pattern p = Pattern.compile(regex);
