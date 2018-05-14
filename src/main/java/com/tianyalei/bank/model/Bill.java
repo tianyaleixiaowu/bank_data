@@ -57,6 +57,11 @@ public class Bill extends BaseEntity {
      */
     private byte young;
 
+    /**
+     * 联系人的所有信息
+     */
+    private String contactContent;
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -71,7 +76,16 @@ public class Bill extends BaseEntity {
                 ", contactId=" + contactId +
                 ", content='" + content + '\'' +
                 ", young=" + young +
+                ", contactContent='" + contactContent + '\'' +
                 '}';
+    }
+
+    public String getContactContent() {
+        return contactContent;
+    }
+
+    public void setContactContent(String contactContent) {
+        this.contactContent = contactContent;
     }
 
     public byte getYoung() {

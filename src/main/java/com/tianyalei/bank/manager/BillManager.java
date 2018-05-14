@@ -44,26 +44,31 @@ public class BillManager {
         billRepository.save(bill);
     }
 
+    /**
+     * 模糊添加的信息，经清洗后保存
+     *
+     * @param billDto
+     *         billDto
+     */
     public void saveMohu(BillMoDto billDto) {
         Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
         contentWasher.contentWash(contact.getId(), billDto.getContent().split("\n"), new Date());
     }
 
+    /**
+     * 将该用户发布的老数据young更改为-1
+     *
+     * @param contactId
+     *         contactId
+     */
     public void updateBillYoung(Long contactId) {
         billRepository.updateYoungBill(contactId);
     }
 
-    public static void main(String[] args) {
-        String s = "半年期：\n" +
-                "2.9046  光大银行*1张   1980\n" +
-                "5万       齐鲁银行*2张    2080\n" +
-                "50万     农商银行*多张   2230\n" +
-                "120万  浙商银行*1张     2230\n" +
-                "注：半年农商50，三张以上➕20";
-        String[] ss = s.split("\n");
-        System.out.println(s.split("\n"));
-    }
 
+    /**
+     * 新增或更新
+     */
     public Bill save(BillDto billDto) throws ParseException {
         Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
         Bill bill;
@@ -82,6 +87,8 @@ public class BillManager {
         byte bankType = LineWasher.washBank(billDto.getBank()).first;
         bill.setBankType(bankType);
         bill.setContactId(contact.getId());
+        //把联系人信息也冗余起来
+        bill.setContactContent(billDto.getCompany());
         return billRepository.save(bill);
     }
 
@@ -136,14 +143,14 @@ public class BillManager {
         }
         String keywords = searchDto.getKeywords();
         if (!StringUtils.isEmpty(keywords)) {
-            criteria.add(Restrictions.like("content", keywords, true));
+            criteria.add(Restrictions.like("contactContent", keywords, true));
         }
 
         Pageable pageable = PageRequest.of(searchDto.getPage() - 1, searchDto.getSize(), Sort.Direction.DESC, "id");
         Page<Bill> billPage = billRepository.findAll(criteria, pageable);
 
         List<BillVO> billVOS = new ArrayList<>();
-        
+
         for (Bill bill : billPage.getContent()) {
             BillVO vo = new BillVO();
             BeanUtils.copyProperties(bill, vo);
@@ -182,4 +189,14 @@ public class BillManager {
         return contactManager.findContact(contactId);
     }
 
+    public static void main(String[] args) {
+        String s = "半年期：\n" +
+                "2.9046  光大银行*1张   1980\n" +
+                "5万       齐鲁银行*2张    2080\n" +
+                "50万     农商银行*多张   2230\n" +
+                "120万  浙商银行*1张     2230\n" +
+                "注：半年农商50，三张以上➕20";
+        String[] ss = s.split("\n");
+        System.out.println(s.split("\n"));
+    }
 }
