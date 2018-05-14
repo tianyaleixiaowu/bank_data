@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,6 +41,7 @@ public class LineWasher {
         bill.setCreateTime(createTime);
         bill.setUpdateTime(createTime);
         bill.setCount(washCount(line));
+        bill.setEndTime(washEndTime(line));
         byte young = 0;
         bill.setYoung(young);
 
@@ -70,6 +73,26 @@ public class LineWasher {
             }
         }
         return 0;
+    }
+
+    private Date washEndTime(String line) {
+        if (line.contains("号") || line.contains("月")) {
+            String pa = "[0-9]{1,2}[.][0-9]{1,2}";
+            Pattern pattern = Pattern.compile(pa);
+            Matcher matcher = pattern.matcher(line);
+
+            String dateStr = null;
+            if (matcher.find()) {
+                dateStr = matcher.group(0);
+            }
+            SimpleDateFormat myFmt = new SimpleDateFormat("yyyy.MM.dd");
+            try {
+                return myFmt.parse("2018." + dateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     private static Integer washCount(String line) {
