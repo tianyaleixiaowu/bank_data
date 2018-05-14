@@ -53,7 +53,7 @@ public class LineWasher {
 
         logger.info(bill.toString());
     }
-
+                                        
     /**
      * 销售价格
      */
