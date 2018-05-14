@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +47,10 @@ public class BillManager {
     public void saveMohu(BillMoDto billDto) {
         Contact contact = contactManager.save(billDto.getNickName(), billDto.getMobile(), billDto.getCompany());
         contentWasher.contentWash(contact.getId(), billDto.getContent().split("\n"), new Date());
+    }
+
+    public void updateBillYoung(Long contactId) {
+        billRepository.updateYoungBill(contactId);
     }
 
     public static void main(String[] args) {
@@ -73,7 +78,7 @@ public class BillManager {
             Date date = formatter.parse(billDto.getEndTime());
             bill.setEndTime(date);
         }
-        
+
         byte bankType = LineWasher.washBank(billDto.getBank()).first;
         bill.setBankType(bankType);
         bill.setContactId(contact.getId());
@@ -84,15 +89,29 @@ public class BillManager {
         billRepository.deleteById(id);
     }
 
+    /**
+     * 条件查询
+     *
+     * @param searchDto
+     *         searchDto
+     * @return 分页
+     */
     public SimplePage<BillVO> find(SearchDto searchDto) {
         Criteria<Bill> criteria = new Criteria<>();
+        //只取某个人发的最新的
+        criteria.add(Restrictions.eq("young", 0, true));
         //半年期
         if (searchDto.getType() != null && -1 != searchDto.getType()) {
             criteria.add(Restrictions.eq("type", searchDto.getType(), true));
         }
         //银行类型
         if (searchDto.getBankType() != null && -1 != searchDto.getBankType()) {
-            criteria.add(Restrictions.eq("bankType", searchDto.getBankType(), true));
+            //4是查城商，包含大城和小城
+            if (4 == searchDto.getBankType()) {
+                criteria.add(Restrictions.in("bankType", Arrays.asList(3, 4), true));
+            } else {
+                criteria.add(Restrictions.eq("bankType", searchDto.getBankType(), true));
+            }
         }
         Integer billPrice = searchDto.getBillPrice();
         if (billPrice != null && -1 != billPrice) {
@@ -124,6 +143,7 @@ public class BillManager {
         Page<Bill> billPage = billRepository.findAll(criteria, pageable);
 
         List<BillVO> billVOS = new ArrayList<>();
+        
         for (Bill bill : billPage.getContent()) {
             BillVO vo = new BillVO();
             BeanUtils.copyProperties(bill, vo);
@@ -133,6 +153,7 @@ public class BillManager {
             vo.setCompany(contact.getCompany());
             vo.setNickName(contact.getNickName());
             vo.setMobile(contact.getMobile());
+            vo.setCreateTime(bill.getCreateTime().toString());
             billVOS.add(vo);
         }
 

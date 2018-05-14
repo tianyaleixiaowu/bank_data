@@ -39,8 +39,15 @@ public class LineWasher {
         bill.setCreateTime(createTime);
         bill.setUpdateTime(createTime);
         bill.setCount(washCount(line));
+        byte young = 0;
+        bill.setYoung(young);
 
+        //设置该contact的其他数据的young为-1
+        billManager.updateBillYoung(contactId);
+
+        //保存该条数据
         billManager.save(bill);
+
         logger.info(bill.toString());
     }
 

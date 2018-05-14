@@ -52,6 +52,10 @@ public class Bill extends BaseEntity {
      * 原文
      */
     private String content;
+    /**
+     * 是否是最新的（0是最新，-1不是）
+     */
+    private byte young;
 
     @Override
     public String toString() {
@@ -66,7 +70,16 @@ public class Bill extends BaseEntity {
                 ", count=" + count +
                 ", contactId=" + contactId +
                 ", content='" + content + '\'' +
+                ", young=" + young +
                 '}';
+    }
+
+    public byte getYoung() {
+        return young;
+    }
+
+    public void setYoung(byte young) {
+        this.young = young;
     }
 
     public String getContent() {

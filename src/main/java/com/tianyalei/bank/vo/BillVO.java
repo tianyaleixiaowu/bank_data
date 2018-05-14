@@ -32,6 +32,10 @@ public class BillVO {
      */
     private String endTime;
     /**
+     * 发布时间
+     */
+    private String createTime;
+    /**
      * 不足、短期1，半年2，一年3，超期4
      */
     private String type;
@@ -123,6 +127,14 @@ public class BillVO {
 
     public String getNickName() {
         return nickName;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public void setNickName(String nickName) {

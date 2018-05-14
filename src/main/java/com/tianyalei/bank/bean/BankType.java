@@ -14,7 +14,7 @@ public interface BankType {
     byte GU_SHANG = 2;
     //大型城商，北京银行、渤海、南京
     byte DA_CHENG_SHANG = 3;
-    //小城市
+    //小城商
     byte CHENG_SHANG = 4;
     //三农商
     byte SAN_NONG = 5;
