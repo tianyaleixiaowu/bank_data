@@ -60,7 +60,7 @@ public class Bill extends BaseEntity {
     /**
      * 联系人的所有信息
      */
-    private String contactContent;
+    private String searchContent;
 
     @Override
     public String toString() {
@@ -76,16 +76,16 @@ public class Bill extends BaseEntity {
                 ", contactId=" + contactId +
                 ", content='" + content + '\'' +
                 ", young=" + young +
-                ", contactContent='" + contactContent + '\'' +
+                ", searchContent='" + searchContent + '\'' +
                 '}';
     }
 
-    public String getContactContent() {
-        return contactContent;
+    public String getSearchContent() {
+        return searchContent;
     }
 
-    public void setContactContent(String contactContent) {
-        this.contactContent = contactContent;
+    public void setSearchContent(String searchContent) {
+        this.searchContent = searchContent;
     }
 
     public byte getYoung() {

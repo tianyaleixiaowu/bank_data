@@ -88,7 +88,7 @@ public class BillManager {
         bill.setBankType(bankType);
         bill.setContactId(contact.getId());
         //把联系人信息也冗余起来
-        bill.setContactContent(billDto.getCompany());
+        bill.setSearchContent(billDto.getCompany() + ";" + billDto.getContent());
         return billRepository.save(bill);
     }
 
@@ -143,7 +143,7 @@ public class BillManager {
         }
         String keywords = searchDto.getKeywords();
         if (!StringUtils.isEmpty(keywords)) {
-            criteria.add(Restrictions.like("contactContent", keywords, true));
+            criteria.add(Restrictions.like("searchContent", keywords, true));
         }
 
         Pageable pageable = PageRequest.of(searchDto.getPage() - 1, searchDto.getSize(), Sort.Direction.DESC, "id");
