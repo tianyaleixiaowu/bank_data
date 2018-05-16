@@ -30,6 +30,7 @@ public class CurrentPriceController {
     @RequestMapping
     public BaseData current(String begin, String end, int page, int size) {
         TupleTwo<List<CurrentPriceVO>, Integer> tupleTwo = currentPriceManager.find(begin, end, page, size);
+        System.out.println(tupleTwo);
         return ResultGenerator.genSuccessResult(tupleTwo.first, tupleTwo.second);
     }
 

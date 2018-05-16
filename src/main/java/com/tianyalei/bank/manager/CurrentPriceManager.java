@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -37,6 +38,7 @@ public class CurrentPriceManager {
     /**
      * 删今天的数据
      */
+    @Transactional(rollbackFor = Exception.class)
     public void deleteTodayData() {
         Date beginTime = DateUtil.beginOfDay(new Date());
         Date endTime = DateUtil.endOfDay(new Date());
@@ -81,14 +83,17 @@ public class CurrentPriceManager {
 
             return new TupleTwo<>(parse(list), count.intValue());
         }
+
+        Date tempBeginTime = beginTime;
         //如果是强制获取或者是数量对不上，就要去看哪天缺失，并且补上
-        for (; beginTime.before(endTime); beginTime = DateUtil.offsetDay(beginTime, 1)) {
-            Date oneDayEnd = DateUtil.endOfDay(beginTime);
+        for (; tempBeginTime.before(endTime); tempBeginTime = DateUtil.offsetDay(tempBeginTime, 1)) {
+            Date oneDayEnd = Common.endOfDay(dateFormat.format(tempBeginTime));
+
             //每一天的数量
-            Long tempCount = currentPriceRepository.countByBuildTimeBetween(beginTime, oneDayEnd);
+            Long tempCount = currentPriceRepository.countByBuildTimeBetween(tempBeginTime, oneDayEnd);
             if (tempCount == 0) {
                 //处理一天的统计值
-                billManager.countOneDayPrice(beginTime, oneDayEnd);
+                billManager.countOneDayPrice(tempBeginTime, oneDayEnd);
             }
         }
 
