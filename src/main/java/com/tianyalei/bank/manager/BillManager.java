@@ -1,5 +1,6 @@
 package com.tianyalei.bank.manager;
 
+import com.tianyalei.bank.bean.BankType;
 import com.tianyalei.bank.bean.SimplePage;
 import com.tianyalei.bank.dao.BillRepository;
 import com.tianyalei.bank.dto.BillDto;
@@ -39,6 +40,8 @@ public class BillManager {
     private ContactManager contactManager;
     @Resource
     private ContentWasher contentWasher;
+    @Resource
+    private CurrentPriceManager currentPriceManager;
 
     public void save(Bill bill) {
         billRepository.save(bill);
@@ -65,6 +68,88 @@ public class BillManager {
         billRepository.updateYoungBill(contactId);
     }
 
+    /**
+     * 计算一天的价格（价格按10、30、50、100万，国股1-2、城商3-4、三农5）
+     * 返回结果
+     * 2230，1  （10万的）
+     * 2210，2
+     */
+    public void countOneDayPrice(Date begin, Date end) {
+        //只统计售价在1000-5000之间的，其他的数据不准。每天只取后200条
+        Pageable pageable = PageRequest.of(0, 200, Sort.Direction.DESC, "id");
+        List<Bill> list = billRepository.findByCreateTimeBetweenAndPriceBetween(begin, end, 1000, 5000, pageable);
+        int[] totalArray = new int[CurrentPriceManager.oneDayCount];
+        int[] countArray = new int[CurrentPriceManager.oneDayCount];
+
+        for (Bill bill : list) {
+            double billPrice = bill.getBillPrice();
+            int price = bill.getPrice();
+            byte bankType = bill.getBankType();
+            //10万的
+            if (Math.abs(10 - billPrice) <= 5) {
+                if (bankType == BankType.GUO_GU || bankType == BankType.GU_SHANG) {
+                    totalArray[0] += price;
+                    countArray[0] += 1;
+                } else if (bankType == BankType.DA_CHENG_SHANG || bankType == BankType.CHENG_SHANG) {
+                    totalArray[1] += price;
+                    countArray[1] += 1;
+                } else if (bankType == BankType.SAN_NONG) {
+                    totalArray[2] += price;
+                    countArray[2] += 1;
+                }
+            } else if (Math.abs(30 - billPrice) <= 5) {
+                if (bankType == BankType.GUO_GU || bankType == BankType.GU_SHANG) {
+                    totalArray[3] += price;
+                    countArray[3] += 1;
+                } else if (bankType == BankType.DA_CHENG_SHANG || bankType == BankType.CHENG_SHANG) {
+                    totalArray[4] += price;
+                    countArray[4] += 1;
+                } else if (bankType == BankType.SAN_NONG) {
+                    totalArray[5] += price;
+                    countArray[5] += 1;
+                }
+            } else if (Math.abs(50 - billPrice) <= 10) {
+                if (bankType == BankType.GUO_GU || bankType == BankType.GU_SHANG) {
+                    totalArray[6] += price;
+                    countArray[6] += 1;
+                } else if (bankType == BankType.DA_CHENG_SHANG || bankType == BankType.CHENG_SHANG) {
+                    totalArray[7] += price;
+                    countArray[7] += 1;
+                } else if (bankType == BankType.SAN_NONG) {
+                    totalArray[8] += price;
+                    countArray[8] += 1;
+                }
+            } else if (Math.abs(100 - billPrice) <= 10) {
+                if (bankType == BankType.GUO_GU || bankType == BankType.GU_SHANG) {
+                    totalArray[9] += price;
+                    countArray[9] += 1;
+                } else if (bankType == BankType.DA_CHENG_SHANG || bankType == BankType.CHENG_SHANG) {
+                    totalArray[10] += price;
+                    countArray[10] += 1;
+                } else if (bankType == BankType.SAN_NONG) {
+                    totalArray[11] += price;
+                    countArray[11] += 1;
+                }
+            }
+        }
+        //计算这12个的结果
+        int[] priceResult = new int[CurrentPriceManager.oneDayCount];
+        for (int i = 0; i < totalArray.length; i++) {
+            int total = totalArray[i];
+            int count = countArray[i];
+            if (count == 0) {
+                priceResult[i] = 0;
+            } else {
+                priceResult[i] = total / count;
+            }
+        }
+
+        int[] billPrices = new int[]{10, 30, 50, 100};
+        int[] bankTypes = new int[]{1, 2, 3};
+        for (int i = 0; i < priceResult.length; i++) {
+            currentPriceManager.save((byte) bankTypes[i % 3], priceResult[i], billPrices[i / 3], begin);
+        }
+    }
 
     /**
      * 新增或更新

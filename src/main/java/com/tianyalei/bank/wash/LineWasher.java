@@ -67,7 +67,7 @@ public class LineWasher {
             String s = m.group();
             if (!"".equals(s)) {
                 int price = Integer.valueOf(s);
-                if (price > 100 && price < 2017 || price > 2021 && price < 10000) {
+                if (price > 1000 && price < 2017 || price > 2021 && price < 10000) {
                     return price;
                 }
             }
@@ -267,7 +267,7 @@ public class LineWasher {
     }
 
     private static String[] guo_banks = {"中国人民银行", "中国进出口银行", "中国农业发展银行", "中国工商银行", "国家开发银行", "工行", "工商", "中国农业银行",
-            "农行", "农业", "中国建设银行", "建行", "中国银行", "进出口银行", "中银", "国股", "中国"};
+            "农行", "农业", "中国建设银行", "建行", "中国银行", "进出口银行", "中银", "国股", "中国", "中行"};
     private static String[] gu_shang = {"民生", "华夏银行", "华夏", "中国光大银行", "光大", "中信",
             "恒丰", "招商银行", "招商", "招行", "中国民生银行", "中信银行",
             "交通银行", "交通", "交行", "兴业银行", "兴业", "上海浦东发展银行",
