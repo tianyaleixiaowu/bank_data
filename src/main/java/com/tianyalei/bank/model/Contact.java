@@ -17,6 +17,26 @@ public class Contact extends BaseEntity {
 
     private String mobile;
 
+    private String wxId;
+
+    private Long companyId;
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getWxId() {
+        return wxId;
+    }
+
+    public void setWxId(String wxId) {
+        this.wxId = wxId;
+    }
+
     public String getMobile() {
         return mobile;
     }
