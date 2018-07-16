@@ -26,6 +26,7 @@ public class LoginController {
     @ResponseBody
     @GetMapping("/wechat")
     public BaseData wechatLogin(String code, String state) {
+        System.out.println(11111);
          //https://open.weixin.qq.com/connect/qrconnect?appid=wxd23291934ad7625e&redirect_uri=http%3A%2F%2Fdp
         // .tianyalei.com/dp/login&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect
 
