@@ -15,3 +15,5 @@ spring:
     active: ${ENV:prod}
 logging:
   file: ./logback.log
+AppID: wx11f9a66892bc6c4d
+AppSecret: 7aadb9fc017fe7bd5da64dd76d3e6d11
