@@ -17,9 +17,11 @@ public class MvcInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
+        //小程序的话，先直接放行
         if ("token".equals(token)) {
             return true;
         }
+        System.out.println("RequestURI=" + request.getRequestURI());
         if (!request.getRequestURI().contains("login")) {
             System.out.println("token：" +  token);
             //没token，或token在缓存中找不到
