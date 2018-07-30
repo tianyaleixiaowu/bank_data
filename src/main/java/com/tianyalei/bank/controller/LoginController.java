@@ -53,7 +53,8 @@ public class LoginController {
     }
 
 
-    @PostMapping
+    @PostMapping("")
+    @ResponseBody
     public BaseData login(String userName, String password) {
         return userManager.login(userName, password);
     }
