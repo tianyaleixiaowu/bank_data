@@ -159,6 +159,7 @@ public class LineWasher {
      * @return 价格
      */
     private Double billPrice(String line) {
+        line = line.toLowerCase();
         if (line.contains("万") || line.contains("w") || line.contains("*")) {
             //找到"万"前面的数字
             int index = line.toLowerCase().indexOf("万");
