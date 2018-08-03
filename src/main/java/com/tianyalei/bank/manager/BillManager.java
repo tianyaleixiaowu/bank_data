@@ -191,7 +191,7 @@ public class BillManager {
     public SimplePage<BillVO> find(SearchDto searchDto) {
         Criteria<Bill> criteria = new Criteria<>();
         //只取某个人发的最新的
-        criteria.add(Restrictions.eq("young", 0, true));
+        //criteria.add(Restrictions.eq("young", 0, true));
         //半年期
         if (searchDto.getType() != null && -1 != searchDto.getType()) {
             criteria.add(Restrictions.eq("type", searchDto.getType(), true));
