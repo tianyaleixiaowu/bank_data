@@ -2,6 +2,7 @@ package com.tianyalei.bank.wash;
 
 import com.tianyalei.bank.bean.BankType;
 import com.tianyalei.bank.manager.BillManager;
+import com.tianyalei.bank.manager.ContactManager;
 import com.tianyalei.bank.model.Bill;
 import com.tianyalei.bank.tuple.TupleTwo;
 import org.slf4j.Logger;
@@ -24,13 +25,16 @@ import java.util.regex.Pattern;
 public class LineWasher {
     @Resource
     private BillManager billManager;
+    @Resource
+    private ContactManager contactManager;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public void lineWash(Long contactId, String line, Date createTime) {
         logger.info("line的内容是：" + line);
         Bill bill = new Bill();
         //保存一下原文
-        bill.setContent(line.replaceAll(" +", " ").replace("\r", ""));
+        String content = line.replaceAll(" +", " ").replace("\r", "");
+        bill.setContent(content);
         bill.setContactId(contactId);
         bill.setType(washType(line));
         TupleTwo<Byte, String> tupleTwo = washBank(line);
@@ -42,6 +46,10 @@ public class LineWasher {
         bill.setUpdateTime(createTime);
         bill.setCount(washCount(line));
         bill.setEndTime(washEndTime(line));
+
+        String company = contactManager.findCompany(contactId);
+        //把联系人信息也冗余起来
+        bill.setSearchContent(company + ";" + content);
         byte young = 0;
         bill.setYoung(young);
 
