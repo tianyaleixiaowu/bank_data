@@ -226,6 +226,15 @@ public class BillManager {
                 criteria.add(Restrictions.gte("billPrice", 500, true));
             }
         }
+        Integer lowPrice = searchDto.getLowPrice();
+        Integer highPrice = searchDto.getHighPrice();
+        if (lowPrice != null) {
+            criteria.add(Restrictions.gte("billPrice", lowPrice, true));
+        }
+        if (highPrice != null) {
+            criteria.add(Restrictions.lt("billPrice", highPrice, true));
+        }
+
         String keywords = searchDto.getKeywords();
         if (!StringUtils.isEmpty(keywords)) {
             criteria.add(Restrictions.like("searchContent", keywords, true));

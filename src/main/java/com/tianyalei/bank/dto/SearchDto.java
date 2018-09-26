@@ -15,6 +15,14 @@ public class SearchDto {
      */
     private Integer billPrice;
     /**
+     * 手填的价格筛选低价
+     */
+    private Integer lowPrice;
+    /**
+     * 手填的价格筛选高价
+     */
+    private Integer highPrice;
+    /**
      * 时间，半年 1年
      */
     private Integer type;
@@ -30,9 +38,27 @@ public class SearchDto {
                 ", size=" + size +
                 ", bankType=" + bankType +
                 ", billPrice=" + billPrice +
+                ", lowPrice=" + lowPrice +
+                ", highPrice=" + highPrice +
                 ", type=" + type +
                 ", keywords='" + keywords + '\'' +
                 '}';
+    }
+
+    public Integer getLowPrice() {
+        return lowPrice;
+    }
+
+    public void setLowPrice(Integer lowPrice) {
+        this.lowPrice = lowPrice;
+    }
+
+    public Integer getHighPrice() {
+        return highPrice;
+    }
+
+    public void setHighPrice(Integer highPrice) {
+        this.highPrice = highPrice;
     }
 
     public Integer getPage() {
