@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_URL}/${DB_NAME:wechat}?autoReconnect=true&useUnicode=true
+    url: jdbc:mysql://${MYSQL_URL}/${DB_NAME:wechat}?autoReconnect=true&useUnicode=true&characterEncoding=utf8
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASS:root}
