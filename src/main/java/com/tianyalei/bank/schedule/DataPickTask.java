@@ -7,6 +7,8 @@ import com.tianyalei.bank.model.MessageEntity;
 import com.tianyalei.bank.tuple.TupleTwo;
 import com.tianyalei.bank.wash.ContactWasher;
 import com.tianyalei.bank.wash.ContentWasher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -29,21 +31,25 @@ public class DataPickTask {
     @Resource
     private ContentWasher contentWasher;
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 每5秒去message表读一次数据
      */
     @Scheduled(fixedRate = 5000)
     public void pickTask() {
+        logger.info("开始读取message表");
         DoneMsgId doneMsgId = doneMsgIdManager.find();
         long begin = 0L, end = 0L;
         MessageEntity last = messageManager.findLastOne();
         if (last != null) {
             end = messageManager.findLastOne().getId();
+            logger.info("最后一个的id是" + end);
         }
         //说明一个都没有处理，那就开始处理全部
         if (doneMsgId != null) {
             begin = doneMsgId.getEnd() + 1;
+            logger.info("第一个的id是" + end);
         }
         if (end < begin) {
             return;
